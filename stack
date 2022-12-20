@@ -1,0 +1,65 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct stack{
+	int size;
+	int top;
+	int *arr;
+};
+typedef struct stack Stack;
+int isempty(Stack *st){
+	if(st->top == -1)
+	return 1;
+	else
+	return 0;
+}
+int isfull(Stack *st){
+	if(st->top == st->size-1)
+	return 1;
+	else
+	return 0;
+}
+void push(Stack *st,int val){
+	if(isfull(st)){
+		printf("Overflow\n");
+	}
+	else{
+		st->top++;
+		st->arr[st->top]=val;	
+	}
+}
+int pop(Stack* st){
+	if(isempty(st))
+	printf("Underflow\n");
+	else{
+		int val=st->arr[st->top];
+		st->top=st->top-1;
+		 printf("%d\n",val);	
+	}
+}
+int topstack(Stack* st){
+return st->arr[st->top];
+}
+int bottomstack(Stack *st){
+    return st->arr[0];
+}
+int main(){
+	Stack *s=(Stack *)malloc(sizeof(Stack));
+	s->size=5;
+	s->top=-1;
+	s->arr=(int *)malloc(s->size*(sizeof(int)));
+	printf("%d\n",isempty(s));
+	printf("%d\n",isfull(s));
+	pop(s);
+	push(s,10);
+	push(s,20);
+	push(s,50);
+	push(s,90);
+	push(s,3);
+	push(s,7);
+	pop(s);
+	push(s,11);
+	printf("%d\n",isempty(s));
+	printf("%d\n",isfull(s));
+	printf("Stack top is:%d",topstack(s));
+	printf("Stack bottom is:%d",bottomstack(s));
+}
